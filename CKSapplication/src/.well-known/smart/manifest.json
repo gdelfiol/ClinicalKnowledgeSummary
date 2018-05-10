@@ -1,0 +1,19 @@
+{
+  "software_id": "dev-newservice.oib.utah.edu:clinical-knowledge-summary:1.0-SNAPSHOT",
+  "client_name": "Patient Data Manager",
+  "client_uri": "https://dev-newservice.oib.utah.edu:80/about.html",
+  "logo_uri": "https://dev-newservice.oib.utah.edu:80/assets/images/interface_example_new.png",
+  "launch_url": "https://dev-newservice.oib.utah.edu:80/",
+  "redirect_uris": [
+    "https://dev-newservice.oib.utah.edu:80/",
+    "https://dev-newservice.oib.utah.edu:80/infobutton"
+  ],
+  "scope": "launch online_access patient/Patient.read patient/Condition.read patient/MedicationRequest.read",
+  "token_endpoint_auth_method": "none",
+  "grant_types": [
+    "authorization_code"
+  ],
+  "fhir_versions": [
+    "1.0.2", "1.4.0", "1.6.0", "1.8.0", "3.0.1"
+  ]
+}

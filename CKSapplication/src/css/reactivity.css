@@ -1,0 +1,169 @@
+@media screen and (max-width: 1200px) {
+  .mat-paginator-page-size {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .mat-paginator-range-actions {
+    margin-left: -190px;
+  }
+}
+
+@media screen and (max-width: 1020px){
+  /*@media screen and (max-width: 600px){*/
+  html {
+    overflow-y: auto;
+  }
+
+  #search_container .dropdown-menu {
+    min-width: 19rem !important;
+    max-width: 19rem;
+  }
+
+  #search_container .mat-icon-button {
+    width: 44px !important;
+    height: 44px !important;
+    margin-top: 2px;
+  }
+  #search_container .mat-icon-button .material-icons {
+    padding-bottom: 10px !important;
+  }
+  .side-bar-closed {
+    position: absolute !important;
+    z-index: 10 !important;
+    width: 30% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  #headerTerm {
+    font-size: 1.2rem;
+  }
+  #leftColumn {
+    visibility: hidden;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  #summary {
+    width: 98% !important;
+  }
+  #tabbed-groups {
+    display: flex !important;
+  }
+  .two-panel {
+    display: none;
+  }
+  #SR, #CT {
+    width: 98% !important;
+    margin: 8px 0 5px 10px !important;
+    float: left !important;
+  }
+  #medications, #conditions {
+    width: 95% !important;
+    margin: 8px 0 5px 10px !important;
+    float: left !important;
+  }
+  #search_container .dropdown-menu {
+    min-width: 100% !important;
+  }
+  #summary .fullscreenicon img {
+    display: none;
+  }
+  #search_container .mat-icon-button .material-icons {
+    padding-bottom: 2px !important;
+  }
+}
+
+@media screen and (max-width: 820px){
+  .side-bar-closed {
+    width: 40% !important;
+  }
+  #headerTerm {
+    top: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  #search-card {
+    width: 96% !important;
+  }
+  #search_container .form-control {
+    width: 75% !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .side-bar-closed {
+    width: 60% !important;
+  }
+  h2 {
+    font-size: 1.8rem !important;
+  }
+  #headerTerm {
+    font-size: 14px;
+  }
+  #search_container .mat-icon-button {
+    width: 40px !important;
+    height: 40px !important;
+    margin-top: 4px;
+  }
+  #search_container .mat-icon-button .material-icons {
+    padding-bottom: 0px !important;
+  }
+}
+
+@media screen and (max-width: 550px){
+  #search_container .form-control {
+    width: 72% !important;
+  }
+  .showDate {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px){
+  #search_container .form-control {
+    width: 66% !important;
+  }
+  .cdk-overlay-pane {
+    right: 40px !important;
+  }
+}
+
+@media screen and (max-width: 400px){
+  #search_container .form-control {
+    width: 60% !important;
+  }
+  .showGender {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .cdk-overlay-pane {
+    left: 0 !important;
+  }
+}
+
+@media screen and (max-height: 700px){
+  .mat-menu-panel {
+    max-height: calc(100vh - 270px) !important;
+  }
+}
+
+@media screen and (max-height: 600px){
+  .topSpace {
+    height: 0 !important;
+  }
+
+  .mat-menu-panel {
+    max-height: calc(100vh - 94px) !important;
+  }
+}
+

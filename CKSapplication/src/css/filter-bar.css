@@ -1,0 +1,138 @@
+.dis10, .dis20, .med10, .med20 {
+  margin-top: -.1rem;
+  vertical-align: middle;
+}
+
+#medication .title {
+  border-bottom: .08rem solid #d1d2d3;
+}
+
+#medication ul {
+  margin-top: .9rem;
+}
+
+#medication ul li {
+  font-size: 0.75em;
+  /*line-height: 1.5em;*/
+  padding: 0;
+}
+
+
+.upperlevel {
+  font-weight:bold;
+}
+.sublevel {
+  width: 100%;
+}
+#TreatList, #DisList {
+  margin-bottom: .5rem;
+}
+#medication ul li .sublevel *:hover {
+  cursor: pointer;
+  color: #6282a8;
+  text-decoration: none;
+}
+
+#medication .upperlevel .filterOptionOnly:hover, #medication .sublevel .filterOptionOnly:hover {
+  color: #6282a8;
+}
+
+#medication .filterOptionNone {
+  cursor: pointer;
+  color: #365899;
+  font-size: 0.9em;
+  font-weight: normal;
+  margin-left: .3rem;
+}
+
+#medication .filterOptionNone:hover {
+  text-decoration: underline;
+}
+
+#medication .filterOptionTypeNone {
+  cursor: pointer;
+  color: #365899;
+  font-size: 0.9em;
+  font-weight: normal;
+  margin-left: .3rem;
+}
+.filterOptionTypeNone {
+  cursor: pointer;
+  color: #1d6dcf;
+  font-size: 0.9em;
+  font-weight: normal;
+  margin-left: .3rem;
+}
+
+#medication .filterOptionTypeNone:hover {
+  text-decoration: underline;
+}
+
+#medication ul {
+  font-size: 1.2em;
+  margin-bottom: -1rem;
+}
+
+#medication li ul {
+  margin-left: .4rem;
+}
+
+#medication .content .text {
+  display: inline;
+}
+
+.medicationItems {
+  margin-bottom:-1.25rem;
+}
+.yearFilters {
+  margin-top:-.5rem;
+}
+
+
+.tunecontentMeds {
+  margin-top: .25rem;
+}
+.tunecontentMeds:hover, .tunecontentMedsLess:hover {
+  cursor: pointer;
+}
+.tunecontentMeds, .tunecontentMedsLess {
+  color: #365899;
+  text-decoration: none;
+  margin-left: .5rem;
+  font-size: .75rem;
+  margin-bottom: -.5rem;
+  display: inline-block;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.CategoryTitle {
+  float: left;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.Medname {
+  font-size: .75rem;
+  vertical-align: middle;
+}
+
+#medication {
+  display: block;
+  height: auto;
+  width: 95%;
+  margin-top: 0;
+  padding: .5rem .5rem 1.3rem .5rem;
+  overflow: auto;
+  transform: scale(1);
+  transition: 0.15s all ease;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+#medication #default {
+  margin-top: 1.8rem;
+}

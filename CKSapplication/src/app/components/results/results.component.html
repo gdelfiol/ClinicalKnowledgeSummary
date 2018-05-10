@@ -1,0 +1,113 @@
+<div class="patientBannerResults" *ngIf="need_patient_banner">
+  Patient: {{patientName}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Age: {{patientAge}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span class="showGender">Gender: {{patientGender}}</span> <span class="showDate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: {{currentDate}}</span>
+</div>
+
+<div id="searchContainer">
+  <app-results-banner
+    [searchText] = searchText
+    [status] = status
+    [displayTerm] = displayTerm
+    [inputFocus] = inputFocus
+    [recentHist] = recentHist
+    [need_patient_banner] = need_patient_banner
+    [showMeds] = showMeds
+    (closeBlurEmit) = closeBlur($event)
+    (changeToRecentEmit) = changeToRecent($event)
+    (changeSideViewEmit) = changeSideView()
+    (addToRecentListEmit) = addToRecentList($event)
+    (clearHistoryEmit) = clearHistory()
+  >
+  </app-results-banner>
+  <p id="fail_to_search_in_resultPage" style="text-align:center; vertical-align:middle"></p>
+</div>
+
+<div [ngSwitch]='status'>
+  <div class="loader-results" *ngSwitchCase="false">
+    <div class="spinner-container"><mat-spinner></mat-spinner></div>
+  </div>
+  <div *ngSwitchCase="true">
+    <div class="blackOut" id="blackOut" *ngIf="inputFocus" [@fadeInOut]></div>
+    <div class="NoResults" *ngIf="srPubmedReturn==false&&ctPubmedReturn==false">Sorry, there are no results for your search.</div>
+    <div id="content" *ngIf="srPubmedReturn==true||ctPubmedReturn==true">
+      <div #meds id="medBox">
+        <app-filter-bar
+          [patientGender] = patientGender
+          [patientAgeCat] = patientAgeCat
+          [gender_exists_bool] = gender_exists_bool
+          [age_exists_bool] = age_exists_bool
+          [gender_bool] = gender_bool
+          [age_group_bool] = age_group_bool
+          [fiveYear] = fiveYear
+          [oneYear] = oneYear
+          [medications] = medications
+          [selectedMedCodes] = selectedMedCodes
+          (updateOptionsEmit)= updateOptions($event)
+          (clearAllEmit) = clearAll()
+          (clearCategoryEmit) = clearCategory($event)
+          (updateCheckedOptionsEmit) = updateCheckedOptions($event)
+          (modifyHeightEmit) = modifyHeight()
+        >
+        </app-filter-bar>
+      </div>
+      <div id="summary">
+        <div id="flexcontent" class="current">
+          <div id="nondefault" *ngIf="sr.entryArray.length>0||ct.entryArray.length>0">
+            <mat-tab-group id="tabbed-groups">
+              <mat-tab label="Systematic Reviews">
+                <div #systematic id="srBox">
+                <app-results-card #systematic
+                  name = "SR"
+                  [myFullScreen] = srFullScreen
+                  [otherFullScreen] = ctFullScreen
+                  [pubMedReturn] = srPubmedReturn
+                  [entries] = sr
+                  [selectedMeds] = selectedMeds
+                  (changeFullScreenEmit) = changeFullScreen($event)
+                >
+                </app-results-card>
+                </div>
+              </mat-tab>
+              <mat-tab label="Clinical Trials">
+                <div #clinical id="ctBox">
+                <app-results-card
+                  name = "CT"
+                  [myFullScreen] = ctFullScreen
+                  [otherFullScreen] = srFullScreen
+                  [pubMedReturn] = ctPubmedReturn
+                  [entries] = ct
+                  [selectedMeds] = selectedMeds
+                  (changeFullScreenEmit) = changeFullScreen($event)
+                >
+                </app-results-card>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+            <div class="two-panel">
+              <app-results-card
+                name = "SR"
+                [myFullScreen] = srFullScreen
+                [otherFullScreen] = ctFullScreen
+                [pubMedReturn] = srPubmedReturn
+                [entries] = sr
+                [selectedMeds] = selectedMeds
+                (changeFullScreenEmit) = changeFullScreen($event)
+              >
+              </app-results-card>
+              <app-results-card
+                name = "CT"
+                [myFullScreen] = ctFullScreen
+                [otherFullScreen] = srFullScreen
+                [pubMedReturn] = ctPubmedReturn
+                [entries] = ct
+                [selectedMeds] = selectedMeds
+                (changeFullScreenEmit) = changeFullScreen($event)
+              >
+              </app-results-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

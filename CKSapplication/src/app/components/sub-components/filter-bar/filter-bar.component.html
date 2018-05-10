@@ -1,0 +1,149 @@
+<div id="leftColumn" #meds class="filterColumn">
+  <mat-card id="medication">
+    <div class="title" style="color: gray;">
+      Refine by
+      <span clickTracker *ngIf="selectedMedCodes.length>0||oneYear||fiveYear||gender_bool||age_group_bool"
+            id="clearAll" class="filterOptionNone" (click)="clearAll()">clear all</span>
+    </div>
+    <div class="content">
+      <ul>
+        <li style="margin-bottom:1rem">
+          <div class='medTitle'>
+            <span class='name' style="font-weight:bold;">Publication Date</span>
+            <div class='text'><span clickTracker *ngIf="oneYear||fiveYear" id="clearYear" class='filterOptionTypeNone'
+                                    (click)="clearCategory('Year')"> clear</span>
+            </div>
+          </div>
+          <ul>
+            <li class="yearFilters">
+              <div class='sublevel' id="yearBox">
+                <label>
+                  <input clickTracker #oneYearBox id="year1" type="checkbox" value="oneYear" name="oneYear" [checked]="oneYear"
+                         (change) ="updateOptions(oneYearBox.checked, 1)" />
+                  <div class='text'><span class='Medname'>1 year</span></div>
+                </label>
+              </div>
+            </li>
+            <li class="yearFilters">
+              <div class='sublevel' id="year5Box">
+                <label>
+                  <input clickTracker #fiveYearBox id="year5" type="checkbox" value="fiveYears" name="fiveYears"
+                         [checked]="fiveYear" (change) ="updateOptions(fiveYearBox.checked, 5)"/>
+                  <div class='text'><span class='Medname'>5 years</span></div>
+                </label>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li style="margin-bottom:1rem" *ngIf="age_exists_bool||gender_exists_bool">
+          <div class='medTitle'>
+            <span class='name' style="font-weight:bold;">Patient Filters</span>
+            <div class='text'><span clickTracker *ngIf="age_group_bool||gender_bool" id="clearPatCats" class='filterOptionTypeNone'
+                                    (click)="clearCategory('Patient_Cats')"> clear</span>
+            </div>
+          </div>
+          <ul>
+            <li class="yearFilters" *ngIf="age_exists_bool">
+              <div class='sublevel'>
+                <label>
+                  <input clickTracker #ageGroupBox id="age" type="checkbox" value="age" name="age" [checked]="age_group_bool"
+                         (change) ="updateOptions(ageGroupBox.checked, ageGroupBox.value)" />
+                  <div class='text'><span class='Medname'>{{patientAgeCat}}</span></div>
+                </label>
+              </div>
+            </li>
+            <li class="yearFilters" *ngIf="gender_exists_bool">
+              <div class='sublevel'>
+                <label>
+                  <input clickTracker #genderBox id="gender" type="checkbox" value="gender" name="gender" [checked]="gender_bool"
+                         (change) ="updateOptions(genderBox.checked, genderBox.value)"/>
+                  <div class='text'><span class='Medname'>{{utiles.toTitleCase(patientGender)}}</span></div>
+                </label>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <span *ngIf="medications.medarr.length>1">
+          <li id="TreatList">
+            <div class='medTitle'>
+              <span class='name' style="font-weight:bold;" *ngIf="medications.medarr[0].subCategories.length>0">Treatment</span>
+              <div class='text'><span clickTracker *ngIf="checkIfCategoryEmpty('Treatment')" id="clearTreats"
+                                      class='filterOptionTypeNone' (click)="clearCategory('Treatment')"> clear</span></div>
+            </div>
+            <ul *ngFor="let medication of medications.medarr[0].subCategories">
+              <li *ngIf="medication['page']===1" class="medicationItems">
+                <div class='sublevel'>
+                  <label>
+                    <input #medCheckBox clickTracker class='med{{medication["page"]}}0' type="checkbox"
+                           value="{{medication['entry'].term}}" name="{{medication['entry'].label}}"
+                           [checked]="medication['entry'].checked"
+                           (change)="updateCheckedOptions($event, medCheckBox.checked, medication['entry'])" />
+                    <div class='text'><span class='Medname'>{{utiles.toTitleCase(medication['entry'].label)}}</span>
+                      <span class='entryCount Medname'> ({{medication['entry'].count}})</span>
+                    </div>
+                  </label>
+                </div>
+              </li>
+            </ul>
+            <span *ngIf="moreMedFlag===true">
+              <ul *ngFor="let medication of medications.medarr[0].subCategories">
+                <li *ngIf="medication['page']===2" class="medicationItems">
+                  <div class='sublevel'>
+                    <label>
+                      <input #medCheckBox clickTracker class='med{{medication["page"]}}0' type="checkbox"
+                             value="{{medication['entry'].term}}" name="{{medication['entry'].label}}"
+                             [checked]="medication['entry'].checked"
+                             (change) ="updateCheckedOptions($event, medCheckBox.checked, medication['entry'])" />
+                      <div class='text'><span class='Medname'>{{utiles.toTitleCase(medication['entry'].label)}}</span>
+                        <span class='entryCount Medname'>({{medication['entry'].count}})</span>
+                      </div>
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </span>
+            <span clickTracker *ngIf="moreMedFlag===false&&medications.medarr[0].subCategories.length>MED_LIST_MIN"
+                  id="treatMoreButton" class="tunecontentMeds" (click)="toggleMedList(0, true)">more</span>
+            <span clickTracker *ngIf="moreMedFlag===true" id="treatLessButton" class="tunecontentMedsLess"
+                  (click)="toggleMedList(0, false)"
+                  [style.paddingTop]="medications.medarr[0].subCategories.length<(MED_LIST_MIN+MED_LIST_MORE) ? '1rem': '.25rem'">
+              less</span>
+          </li>
+          <li id="DisList">
+            <div class='medTitle'>
+              <span class='name' style="font-weight:bold;" *ngIf="medications.medarr[1].subCategories.length>0">Disease</span>
+              <div class='text'><span clickTracker *ngIf="checkIfCategoryEmpty('Disease')" id="clearDis"
+                                      class='filterOptionTypeNone' (click)="clearCategory('Disease')"> clear</span>
+              </div>
+            </div>
+            <ul *ngFor="let medication of medications.medarr[1].subCategories; let j=index">
+              <li *ngIf="medication['page']===1" class="medicationItems">
+                <div class='sublevel'>
+                  <label>
+                    <input #medCheckBox clickTracker class='dis{{medication["page"]}}0' type="checkbox" value="{{medication['entry'].term}}" name="{{medication['entry'].label}}" [checked]="medication['entry'].checked" (change) ="updateCheckedOptions($event, medCheckBox.checked, medication['entry'])" />
+                    <div class='text'><span class='Medname'>{{utiles.toTitleCase(medication['entry'].label)}}</span><span class='entryCount Medname'> ({{medication['entry'].count}})</span></div>
+                  </label>
+                </div>
+              </li>
+            </ul>
+            <span *ngIf="moreDisFlag===true">
+              <ul *ngFor="let medication of medications.medarr[1].subCategories; let j=index">
+                <li *ngIf="medication['page']==2" class="medicationItems">
+                  <div class='sublevel'>
+                    <label>
+                      <input #medCheckBox clickTracker class='dis{{medication["page"]}}0' type="checkbox" value="{{medication['entry'].term}}" name="{{medication['entry'].label}}" [checked]="medication['entry'].checked" (change) ="updateCheckedOptions($event, medCheckBox.checked, medication['entry'])" />
+                      <div class='text'><span class='Medname'>{{utiles.toTitleCase(medication['entry'].label)}}</span><span class='entryCount Medname'> ({{medication['entry'].count}})</span></div>
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </span>
+            <span clickTracker *ngIf="moreDisFlag===false&&medications.medarr[1].subCategories.length>MED_LIST_MIN" id="disMoreButton" class="tunecontentMeds" (click)="toggleMedList(1, true)">more</span>
+            <span clickTracker *ngIf="moreDisFlag===true" id="disLessButton" class="tunecontentMedsLess" (click)="toggleMedList(1, false)" [style.paddingTop]="medications.medarr[1].subCategories.length<(MED_LIST_MIN+MED_LIST_MORE) ? '1rem': '.25rem'">less</span>
+          </li>
+        </span>
+      </ul>
+      <span *ngIf="medications.medarr.length<1">No medications for this search keyword yet.</span>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,116 @@
+.medTitle {
+  margin-bottom: -.5rem
+}
+
+.loader-results {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+#SR, #CT {
+  display: block;
+  margin-top: .9rem;
+  padding: .5rem .9rem;
+  width: 49.5%;
+  height: auto;
+  visibility: visible;
+  background-color: white;
+}
+#SR {
+  float: left;
+}
+#CT {
+  float: right;
+}
+
+#SR .active, #CT .active {
+  visibility: visible;
+  width: 100%;
+}
+#SR .inactive, #CT .inactive {
+  visibility: hidden;
+  width: 0;
+}
+
+.NoResults {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 1.5rem;
+  left: 50%;
+  transform: translate(-50%,0);
+  position: absolute;
+  width: 90%;
+}
+
+#patienthome, #reference, #fastcontent, #flexcontent {
+  width: 100%;
+}
+
+#flexcontent #default {
+  margin-top : 1.8rem;
+}
+
+.blackOut {
+  background-color: black;
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  opacity: 0.5;
+  display: block;
+}
+
+.topSpace {
+  height: 8rem;
+}
+
+.two-panel {
+  visibility: visible;
+  opacity: 1;
+}
+
+.side-bar-closed {
+  visibility: hidden;
+  opacity: 0 ;
+  width: 0 ;
+  height: 0 ;
+  overflow: hidden ;
+}
+
+.side-bar-closed-body {
+  width: 98% !important;
+}
+
+#leftColumn {
+  width: 18%;
+  float: left;
+  transition: width ease .15s;
+}
+
+.spinner-container {
+  top: 200px;
+  left: 50% !important;
+  transform: translate(-50%,0) !important;
+  position: absolute !important;
+}
+
+.patientBannerResults {
+  padding: 6px 0 0 20px;
+  height: 32px;
+  width: 100%;
+  background-color: #3F51B5;
+  color: white;
+  z-index: 1000;
+}
+
+.optionsButton .mat-icon-button {
+  width: 40px !important;
+  height: 40px !important;
+  float: right !important;
+  margin-right: 8px !important;
+  top: 5px !important;
+  color: #ffffff;
+}
+
+#tabbed-groups {
+  display: none;
+}

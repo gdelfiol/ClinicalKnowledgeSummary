@@ -1,0 +1,112 @@
+
+
+#summary .fullscreenicon {
+  float: right;
+  width: 10%;
+}
+
+
+#summary .fullscreenicon img {
+  float: right;
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-top: 0;
+}
+
+.tunecontent{
+  color: #365899;
+  text-decoration: none;
+}
+
+.tunecontent:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#summary .fullscreenicon img:hover {
+  cursor: pointer;
+}
+
+#summary .title {
+  float: left;
+  font-size: 80%;
+}
+
+#summary .ksummary {
+  color: black;
+  display: inline-block;
+  font-size: 14px;
+}
+
+#summary .ksummary ul li {
+  margin-top: .4rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.selectedMedsMatch {
+  background-color: yellow;
+}
+
+button.more {
+  margin-top: .9rem;
+}
+
+#summary {
+  float: right;
+  min-height: 87%;
+  width: 81%;
+  margin-right: 10px;
+}
+
+.pubtitle {
+  text-decoration: none;
+  /*color: #1a0dab;*/
+  color: #365899;
+}
+
+.pubtitle:hover {
+  color: #365899;
+}
+
+.ksummary {
+  height: 90%;
+  width: 100%;
+  margin-top: -.5rem;
+  overflow: auto;
+}
+
+.showfullscreen {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.SR-paginator .mat-paginator-container {
+  float: left !important;
+  height: 16px !important;
+  min-height: 0 !important;
+  margin-left: -150px;
+  padding: 40px 14px 10px 14px !important;
+}
+
+.CT-paginator .mat-paginator-container {
+  float: left !important;
+  height: 16px !important;
+  min-height: 0 !important;
+  margin-left: -110px;
+  padding: 40px 18px 10px 18px !important;
+}
+
+.mat-paginator-range-actions .mat-icon-button {
+  margin-bottom: 6px !important;
+}
+
+.mat-paginator-range-label {
+  margin: 0 32px 2px 24px !important;
+}

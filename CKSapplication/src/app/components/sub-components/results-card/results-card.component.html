@@ -1,0 +1,69 @@
+<mat-card id="{{name}}" *ngIf="otherFullScreen===false" [ngClass]="{'showfullscreen': myFullScreen }" >
+  <div class="header">
+    <div *ngIf="name=='SR'" class="CategoryTitle">Systematic Reviews</div>
+    <div *ngIf="name=='CT'" class="CategoryTitle">Clinical Trials</div>
+    <span *ngIf="myFullScreen==false">
+      <div clickTracker (click)="changeFullScreen(name,true,$event)" class="fullscreenicon" id="closefullscreen{{name}}">
+        <img src="../../../assets/images/if_fullscreen_118670.png" alt="full screen">
+      </div>
+    </span>
+    <span *ngIf="myFullScreen==true">
+    <div clickTracker id="fullscreen{{name}}" (click)="changeFullScreen(name,false,$event)" class="fullscreenicon">
+      <img src="../../../assets/images/if_fullscreen_exit_118667.png" alt="close full screen">
+    </div>
+    </span>
+
+    <span class="{{name}}-paginator">
+      <mat-paginator clickTracker id="paginator{{name}}"[length]="entries.entryArray.length"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="changePage($event)">
+      </mat-paginator>
+    </span>
+  </div>
+  <div class="ksummary">
+    <div class="paging_container_{{name}}">
+      <hr>
+      <span *ngIf="pubMedReturn==false||entries.entryArray.length<1">No Systematic Reviews found</span>
+      <span *ngIf="entries.entryArray.length>0&&pubMedReturn==true">
+        <ul class="paging_content_{{name}}">
+          <li *ngFor="let entry of entries.entryArray" >
+            <span *ngIf="entry['page']<=pageNum*pageSize/5&&entry['page']>(pageNum-1)*pageSize/5">
+              <a clickTracker class="pubtitle {{name}}" target="_blank" href="{{entry['entry'].link}}">
+                <span [innerHTML]="highlightMedications(entry['entry'].title,false)"></span>
+              </a>
+              <span class="journal italic">{{entry['entry'].source}}.</span>
+              <span class="pubdate">{{entry['entry'].pubdate.split("-")[0]}}.</span>
+                <br>
+              <span class="relSentence">
+                <span class="results" id="{{name}}{{entry['entry'].id}}"></span>
+                <span *ngIf="entry['entry'].showBool">
+                  <span *ngIf="checkRegEx(entry['entry'].abstract,':')">
+                    <span class="bold">{{entry['entry'].abstract.split(":")[0]}}:</span>
+                    <span [innerHTML]="highlightMedications(entry['entry'].abstract,true)"></span>
+                  </span>
+                  <span *ngIf="!checkRegEx(entry['entry'].abstract,':')">
+                    <span [innerHTML]="highlightMedications(entry['entry'].abstract,true)"></span>
+                  </span>
+                  <br>
+                </span>
+                <span *ngIf="checkRegEx(entry['entry'].summary,':')">
+                  <span class="bold">{{entry['entry'].summary.split(":")[0]}}:</span>
+                  <span [innerHTML]="highlightMedications(entry['entry'].summary,true)"></span>
+                </span>
+                <span *ngIf="!checkRegEx(entry['entry'].summary,':')">
+                  <span [innerHTML]="highlightMedications(entry['entry'].summary,true)"></span>
+                </span>
+                <span clickTracker *ngIf="!entry['entry'].showBool" class="tunecontent {{name}}" id="{{entry['entry'].id}}"
+                      (click)="toggleMore(entry['entry'], true)">more</span>
+                <span clickTracker *ngIf="entry['entry'].showBool" class="tunecontent {{name}}less"
+                      (click)="toggleMore(entry['entry'],false)">less</span>
+                <img class="more" src="https://c1.tacdn.com/img2/x.gif">
+              </span>
+            </span>
+          </li>
+        </ul>
+      </span>
+    </div>
+  </div>
+</mat-card>

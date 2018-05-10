@@ -1,0 +1,60 @@
+{
+  "name": {
+    "history-search": "History button, Search",
+    "history-item-results mat-menu-item ng-star-inserted cdk-focused cdk-mouse-focused": "History list item, Search",
+    "clearHistory-search": "History delete button, Search",
+    "addToQuery": "Adding Item to query, Search",
+    "clearQuery": "Clear the query, Search",
+    "searchIcon": "Search button, Search",
+    "searchEnter": "Search with enter key, Search",
+    "conditions mat-list-item mat-list-option ng-star-inserted mat-list-item-focus": "SMART condition list, Search",
+    "medications mat-list-item mat-list-option ng-star-inserted mat-list-item-focus": "SMART medication list, Search",
+    "fullscreenSR": "SR Full screen, Results",
+    "fullscreenCT": "CT Full screen, Results",
+    "closefullscreenSR": "SR close full screen, Results",
+    "closefullscreenCT": "CT close full screen, Results",
+    "tunecontent SR ng-tns-c3-0": "SR more buttons, Results",
+    "tunecontent CT ng-tns-c3-0": "CT more buttons, Results",
+    "tunecontent SRless ng-tns-c3-0": "SR less buttons, Results",
+    "tunecontent CTless ng-tns-c3-0": "CT less buttons, Results",
+    "clearAll": "Clear All, Results",
+    "year1": "Publication years 1, Results",
+    "year5": "Publication years 5, Results",
+    "clearPatCats": "Clear patient categories, Results",
+    "clearYear": "Year Clear, Results",
+    "treatMoreButton": "Treatment more button, Results",
+    "disMoreButton": "Disease more button, Results",
+    "treatLessButton": "Treatment less button, Results",
+    "disLessButton": "Disease less button, Results",
+    "clearTreats": "Treatment Clea, Resultsr",
+    "clearDis": "Disease Clear, Results",
+    "med10": "Treatment boxes 10, Results",
+    "dis10": "Disease boxes 10, Results",
+    "med20": "Treatment boxes 20, Results",
+    "dis20": "Disease boxes 20, Results",
+    "paginatorSR": "Pagination SR, Results",
+    "paginatorCT": "Pagination CT, Results",
+    "pubtitle SR": "SR PMID links, Results",
+    "pubtitle CT": "CT PMID links, Results",
+    "menu-nav": "Top left menu, Results",
+    "topRightMenu": "Top right menu, Results",
+    "backToSearch": "Back to search in top right, Results",
+    "clearHistory-results": "Clear the history in top right, Results",
+    "link-to-SMART": "open the SMART demo, About",
+    "link-to-StandAlone": "open the standalone with link, About",
+    "rct_button": "Button to open RCT comp, RCTComp",
+    "rctcheckbox ng-star-inserted": "RCT Checkboxes, RCTComp",
+    "clearAllRCTs": "Clear all RCT Checkboxes, RCTComp",
+    "articleList": "Article List link, RCTComp",
+    "efficacyGraph": "Efficacy Graph link, RCTComp",
+    "compTable": "Comp Graph link, RCTComp"
+  },
+
+  "path": [
+    "search", "results", "infobutton", "smart", "about"
+  ],
+
+  "app": [
+    "CKS", "CKS-RCTComp"
+  ]
+}

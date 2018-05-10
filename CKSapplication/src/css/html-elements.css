@@ -1,0 +1,42 @@
+html body{
+  /*background-color: #3F51B5;*/
+  /*background-color: white;*/
+  background-color: #E8EAF6;
+  font-family: Roboto, sans-serif;
+}
+
+html {
+  overflow-y: scroll;
+  padding-bottom: 10px;
+}
+
+a {
+  color: #5F9CDF;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+div {
+  display: block;
+}
+
+
+
+button:focus {
+  outline:0;
+  cursor: pointer;
+}
+
+h2 {
+  color: #000000;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  padding-top: 2rem;
+}

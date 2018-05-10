@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tracking CKS</title>
+  <style>
+    table, td, th {
+      border: 1px solid gray;
+      padding: 2px;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+  </style>
+</head>
+<body>
+<table>
+  <tbody>
+  <tr>
+    <td>
+      <b>Search</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">History button</div>
+    </td>
+    <td>
+      <div class="td_row_even">history-search</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">History list item</div>
+    </td>
+    <td>
+      <div class="td_row_even">history-item-results mat-menu-item ng-star-inserted cdk-focused cdk-mouse-focused</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">History delete button</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearHistory-search</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Adding Item to query</div>
+    </td>
+    <td>
+      <div class="td_row_even">addToQuery</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Clear the query</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearQuery</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Search button</div>
+    </td>
+    <td>
+      <div class="td_row_even">searchIcon</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Search with enter key</div>
+    </td>
+    <td>
+      <div class="td_row_even">searchEnter</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">SMART condition list</div>
+    </td>
+    <td>
+      <div class="td_row_even">conditions mat-list-item mat-list-option ng-star-inserted mat-list-item-focus</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">SMART medication list</div>
+    </td>
+    <td>
+      <div class="td_row_even">medications mat-list-item mat-list-option ng-star-inserted mat-list-item-focus</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Results</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">SR Full screen</div>
+    </td>
+    <td>
+      <div class="td_row_even">fullscreenSR</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">CT Full screen</div>
+    </td>
+    <td>
+      <div class="td_row_even">fullscreenCT</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">SR close full screen</div>
+    </td>
+    <td>
+      <div class="td_row_even">closefullscreenSR</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">CT close full screen</div>
+    </td>
+    <td>
+      <div class="td_row_even">closefullscreenCT</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">SR more buttons</div>
+    </td>
+    <td>
+      <div class="td_row_even">tunecontent SR ng-tns-c3-0</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">CT more buttons</div>
+    </td>
+    <td>
+      <div class="td_row_even">tunecontent CT ng-tns-c3-0</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">SR less buttons</div>
+    </td>
+    <td>
+      <div class="td_row_even">tunecontent SRless ng-tns-c3-0</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">CT less buttons</div>
+    </td>
+    <td>
+      <div class="td_row_even">tunecontent CTless ng-tns-c3-0</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Clear All</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearAll</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Publication years 1</div>
+    </td>
+    <td>
+      <div class="td_row_even">year1</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Publication years 5</div>
+    </td>
+    <td>
+      <div class="td_row_even">year5</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Clear patient categories</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearPatCats</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Year Clear</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearYear</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Treatment more button</div>
+    </td>
+    <td>
+      <div class="td_row_even">treatMoreButton</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Disease more button</div>
+    </td>
+    <td>
+      <div class="td_row_even">disMoreButton</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Treatment less button</div>
+    </td>
+    <td>
+      <div class="td_row_even">treatLessButton</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Disease less button</div>
+    </td>
+    <td>
+      <div class="td_row_even">disLessButton</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Treatment Clear</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearTreats</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Disease Clear</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearDis</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Treatment boxes 10</div>
+    </td>
+    <td>
+      <div class="td_row_even">med10</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Disease boxes 10</div>
+    </td>
+    <td>
+      <div class="td_row_even">dis10</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Treatment boxes 20</div>
+    </td>
+    <td>
+      <div class="td_row_even">med20</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Disease boxes 20</div>
+    </td>
+    <td>
+      <div class="td_row_even">dis20</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Pagination SR</div>
+    </td>
+    <td>
+      <div class="td_row_even">paginatorSR</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Pagination CT</div>
+    </td>
+    <td>
+      <div class="td_row_even">paginatorCT</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">SR PMID links</div>
+    </td>
+    <td>
+      <div class="td_row_even">pubtitle SR</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">CT PMID links</div>
+    </td>
+    <td>
+      <div class="td_row_even">pubtitle CT</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Top left menu</div>
+    </td>
+    <td>
+      <div class="td_row_even">menu-nav</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Top right menu</div>
+    </td>
+    <td>
+      <div class="td_row_even">topRightMenu</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Back to search in top right</div>
+    </td>
+    <td>
+      <div class="td_row_even">backToSearch</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Clear the history in top right</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearHistory-results</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>About</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">open the SMART demo</div>
+    </td>
+    <td>
+      <div class="td_row_even">link-to-SMART</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">open the standalone with link</div>
+    </td>
+    <td>
+      <div class="td_row_even">link-to-StandAlone</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>RCT-Comp</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Button to open RCT comp</div>
+    </td>
+    <td>
+      <div class="td_row_even">rct_button</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">RCT Checkboxes</div>
+    </td>
+    <td>
+      <div class="td_row_even">rctcheckbox ng-star-inserted</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Clear all RCT Checkboxes</div>
+    </td>
+    <td>
+      <div class="td_row_even">clearAllRCTs</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Article List link</div>
+    </td>
+    <td>
+      <div class="td_row_even">articleList</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Efficacy Graph link</div>
+    </td>
+    <td>
+      <div class="td_row_even">efficacyGraph</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="td_head">Comp Graph link</div>
+    </td>
+    <td>
+      <div class="td_row_even">compTable</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Paths</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      search, results, smart, infobutton, about
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Note: infobutton includes cds-hooks calls
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Apps</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      CKS, CKS-RCTComp
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

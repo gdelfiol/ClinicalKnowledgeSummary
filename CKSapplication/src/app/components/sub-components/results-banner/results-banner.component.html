@@ -1,0 +1,28 @@
+<button mat-icon-button clickTracker id="menu-nav" class="menu-navigation" (click)="changeSideView()">
+  <mat-icon id="menu-nav-icon">menu</mat-icon>
+</button>
+<div id="headerTerm">{{displayTerm}}</div>
+<span class="optionsButton">
+  <button mat-icon-button clickTracker id="topRightMenu" [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</span>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item clickTracker id="backToSearch" (click)="backToSearch()">
+    <mat-icon>search</mat-icon>
+    <span>Back to Search</span>
+  </button>
+  <button mat-menu-item clickTracker [matMenuTriggerFor]="menu2" [disabled]="recentHist.length===0">
+    <mat-icon>history</mat-icon>
+    Browsing History
+    <span>
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item clickTracker class="history-item-results" *ngFor="let item of recentHist" (click)="changeToRecent(item.term)">{{item.term}}</button>
+        <button mat-menu-item clickTracker id="clearHistory-results" (click)="clearHistory()">
+          <mat-icon>delete</mat-icon>
+          <span>Clear History</span>
+        </button>
+      </mat-menu>
+    </span>
+  </button>
+</mat-menu>

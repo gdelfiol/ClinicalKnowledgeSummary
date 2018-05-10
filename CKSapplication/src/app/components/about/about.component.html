@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="html-body-about-page">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:url" content="https://dev-newservice.oib.utah.edu:80">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Clinical Knowledge Summary">
+  <meta property="og:description" content="The CKS app finds and summarizes the results of high quality clinical trials and systematic reviews on specific disease treatments.">
+  <meta property="og:image" content="https://dev-newservice.oib.utah.edu:80/assets/images/interface_example_new.png">
+
+  <title>Clinical Knowledge Summary</title>
+
+</head>
+
+<body class="html-body-about-page">
+  <div class="navbar">
+    <img src="assets/images/UofUlogo.png">
+    <div class="row">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Demo App</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a href="https://apps.smarthealthit.org/app/clinical-knowledge-summary" target="_blank">
+              <button clickTracker class="dropdown-item" id="link-to-SMART">SMART Gallery</button>
+            </a>
+            <a href="https://dev-newservice.oib.utah.edu:80" target="_blank">
+              <button clickTracker class="dropdown-item" id="link-to-StandAlone">Stand-Alone App</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="index_header">Clinical Knowledge Summary</div>
+  </div>
+  <div class="index_outside_navbar">
+    <div class="index_body">
+      <div class="screenshot">
+        <a class="zoombox" href="about#image">
+          <img src="assets/images/interface_example_new.png">
+        </a>
+      </div>
+      <div class="index_body_side">
+        Finding recent evidence on the effectiveness of disease treatments can be effortful.
+        The Clinical Knowledge Summary app uses sophisticated machine learning algorithms to search for high quality systematic reviews
+        and clinical trials in PubMed. Users can filter results by treatment, diseases, publication date range, and patient-specific parameters.
+        Just type in a disease or medication name (or a combination of either) and let the app do the searching for you.
+        The app provides "typeahead" functionality with terms extracted from a controlled vocabulary (MeSH).
+        <br/>
+        <br/>
+        This app functions as both a SMART on FHIR app as well as a stand-alone app. The SMART functionality allows users access to a patient's
+        conditions and medication lists. The user can select any of these items for searching. The stand-alone app has just as much functionality,
+        but does not provide patient context.
+        <div class="index_body_side_specs">
+          <div class="specs_instance">
+            Designed for
+            <div class="specs_instance_def">Clinicians</div>
+          </div>
+          <div class="specs_instance">
+            FHIR Compatibility
+            <div class="specs_instance_def">DSTU 2</div>
+            <div class="specs_instance_def">STU 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="zoombox-target" id="image">
+    <img src="assets/images/interface_example_new.png">
+    <a class="zoombox-close" href="/about"></a>
+  </div>
+
+</body>
+</html>

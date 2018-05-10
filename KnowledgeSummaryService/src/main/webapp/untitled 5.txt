@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+var base_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi" ;
+var KS_url = "http://service.oib.utah.edu:8080/org.utah.edu.semmed.SemmedService/json" ;
+var pubmedID = [] ;
+
+function firstQuery (query) {
+
+	return new Promise(function (resolve, reject) {
+    	$.post(base_url,
+       	{
+        	term: query,
+        	db: "pubmed",
+        	retmode: "json",
+        	rettype: "uilist"
+        },
+    	function(data){
+    		resolve(data);
+    			//var tempStr = JSON.stringify(data);
+		});
+	});
+};
+
+
+function secondQuery (query) {
+
+	return new Promise(function (resolve, reject) {
+		$.post(base_url,
+	    {
+       		term: query,
+        	db: "pubmed",
+        	retmode: "json",
+        	rettype: "uilist",
+        	retmax: "100000"
+    	},
+    	function(data){
+    		resolve(data);
+    			//var tempStr = JSON.stringify(data);
+		});
+	});
+};
+
+function ksQuery (input) {
+
+	return new Promise(function (resolve, reject) {
+		$.post(KS_url,
+	    {
+       		data: input,
+       		dataType: "json"
+    	},
+    	function(data){
+    		resolve(data);
+    			//var tempStr = JSON.stringify(data);
+		});
+	});
+};
+
+
+//for query space should be replaced by "+" signs. 
+$(document).ready(function(){
+    $("button").click(function(){
+    	var query = $('#querybox_text').val();
+    	query = query.replace (" ","+"); // [MeSH Terms]
+    	var search_strategy_SR = ' AND "therapy"[Subheading] AND systematic[sb] AND ("systematic review"[ti] OR "meta-analysis"[ti] OR "Cochrane Database Syst Rev"[journal]) AND ("2009/08/01"[CDAT] : "2014/08/01"[CDAT]) AND "humans"[MeSH Terms] AND "english"[language] AND hasabstract[text] AND ("Acad Emerg Med"[Journal] OR "Acad Med"[Journal] OR "Acta Orthop"[Journal] OR "Age Ageing"[Journal] OR "AJR Am J Roentgenol"[Journal] OR "Am Fam Physician"[Journal] OR "Am Heart J"[Journal] OR "Am J Cardiol"[Journal] OR "Am J Clin Nutr"[Journal] OR "Am J Clin Pathol"[Journal] OR "Am J Epidemiol"[Journal] OR "Am J Gastroenterol"[Journal] OR "Am J Kidney Dis"[Journal] OR "Am J Med"[Journal] OR "Am J Med Sci"[Journal] OR "Am J Nurs"[Journal] OR "Am J Obstet Gynecol"[Journal] OR "Am J Ophthalmol"[Journal] OR "Am J Pathol"[Journal] OR "Am J Phys Med Rehabil"[Journal] OR "Am J Prev Med"[Journal] OR "Am J Psychiatry"[Journal] OR "Am J Public Health"[Journal] OR "Am J Respir Crit Care Med"[Journal] OR "Am J Sports Med"[Journal] OR "Am J Surg"[Journal] OR "Am J Trop Med Hyg"[Journal] OR "Anaesthesia"[Journal] OR "Anesth Analg"[Journal] OR "Anesthesiology"[Journal] OR "Ann Emerg Med"[Journal] OR "Ann Fam Med"[Journal] OR "Ann Intern Med"[Journal] OR "Ann Neurol"[Journal] OR "Ann Otol Rhinol Laryngol"[Journal] OR "Ann Rheum Dis"[Journal] OR "Ann Surg"[Journal] OR "Ann Thorac Surg"[Journal] OR "Appl Nurs Res"[Journal] OR "Arch Dis Child"[Journal] OR "Arch Dis Child Fetal Neonatal Ed"[Journal] OR "Arch Environ Occup Health"[Journal] OR "Arch Pathol Lab Med"[Journal] OR "Arch Phys Med Rehabil"[Journal] OR "Arthritis Care Res (Hoboken)"[Journal] OR "Arthritis Rheum"[Journal] OR "Arthroscopy"[Journal] OR "BJOG"[Journal] OR "Blood"[Journal] OR "BMJ"[Journal] OR "Bone Joint J"[Journal] OR "Br J Gen Pract"[Journal] OR "Br J Psychiatry"[Journal] OR "Br J Radiol"[Journal] OR "Br J Surg"[Journal] OR "Brain"[Journal] OR "CADTH Technol Overv"[Journal] OR "CA Cancer J Clin"[Journal] OR "Can J Anaesth"[Journal] OR "Cancer"[Journal] OR "Cancer Nurs"[Journal] OR "Chest"[Journal] OR "Circulation"[Journal] OR "Clin J Am Soc Nephrol"[Journal] OR "Clin J Pain"[Journal] OR "Clin Orthop Relat Res"[Journal] OR "Clin Pediatr (Phila)"[Journal] OR "Clin Pharmacol Ther"[Journal] OR "Clin Rehabil"[Journal] OR "Clin Toxicol (Phila)"[Journal] OR "CMAJ"[Journal] OR "Cochrane Database Syst Rev"[Journal] OR "Crit Care Med"[Journal] OR "Curr Probl Surg"[Journal] OR "Diabet Med"[Journal] OR "Diabetes"[Journal] OR "Diabetes Care"[Journal] OR "Diabetes Obes Metab"[Journal] OR "Dig Dis Sci"[Journal] OR "Dis Mon"[Journal] OR "Endocrinology"[Journal] OR "Eur Heart J"[Journal] OR "Eur Respir J"[Journal] OR "Evid Rep Technol Assess (Full Rep)"[Journal] OR "Fam Pract"[Journal] OR "Foot Ankle Int"[Journal] OR "Gastroenterology"[Journal] OR "Gut"[Journal] OR "Headache"[Journal] OR "Health Technol Assess"[Journal] OR "Heart"[Journal] OR "Heart Lung"[Journal] OR "Hosp Health Netw"[Journal] OR "Hosp Pract (1995)"[Journal] OR "Implement Sci"[Journal] OR "Int J Clin Pract"[Journal] OR "Int J Nurs Stud"[Journal] OR "Int J Obes (Lond)"[Journal] OR "J Acad Nutr Diet"[Journal] OR "J Adv Nurs"[Journal] OR "J Allergy Clin Immunol"[Journal] OR "J Am Coll Cardiol"[Journal] OR "J Am Coll Surg"[Journal] OR "J Am Geriatr Soc"[Journal] OR "J Am Soc Nephrol"[Journal] OR "J Arthroplasty"[Journal] OR "J Bone Joint Surg Am"[Journal] OR "J Clin Endocrinol Metab"[Journal] OR "J Clin Invest"[Journal] OR "J Clin Nurs"[Journal] OR "J Clin Oncol"[Journal] OR "J Clin Pathol"[Journal] OR "J Clin Pharmacol"[Journal] OR "J Fam Pract"[Journal] OR "J Gen Intern Med"[Journal] OR "J Gerontol A Biol Sci Med Sci"[Journal] OR "J Gerontol B Psychol Sci Soc Sci"[Journal] OR "J Immunol"[Journal] OR "J Infect Dis"[Journal] OR "J Laryngol Otol"[Journal] OR "J Nerv Ment Dis"[Journal] OR "J Neurol Neurosurg Psychiatry"[Journal] OR "J Neurosurg"[Journal] OR "J Nurs Adm"[Journal] OR "J Nurs Scholarsh"[Journal] OR "J Oral Maxillofac Surg"[Journal] OR "J Orthop Sports Phys Ther"[Journal] OR "J Orthop Trauma"[Journal] OR "J Pain"[Journal] OR "J Pediatr"[Journal] OR "J Pediatr Orthop"[Journal] OR "J Physiother"[Journal] OR "J Rheumatol"[Journal] OR "J Shoulder Elbow Surg"[Journal] OR "J Surg Oncol"[Journal] OR "J Thorac Cardiovasc Surg"[Journal] OR "J Trauma"[Journal] OR "J Trauma Acute Care Surg"[Journal] OR "J Urol"[Journal] OR "J Vasc Surg"[Journal] OR "JAMA"[Journal] OR "JAMA Dermatol"[Journal] OR "Arch Dermatol"[Journal] OR "JAMA Intern Med"[Journal] OR "Arch Intern Med"[Journal] OR "JAMA Neurol"[Journal] OR "Arch Neurol"[Journal] OR "JAMA Ophthalmol"[Journal] OR "Arch Ophthalmol"[Journal] OR "JAMA Otolaryngol Head Neck Surg"[Journal] OR "Arch Otolaryngol Head Neck Surg"[Journal] OR "JAMA Pediatr"[Journal] OR "Arch Pediatr Adolesc Med"[Journal] OR "JAMA Psychiatry"[Journal] OR "Arch Gen Psychiatry"[Journal] OR "JAMA Surg"[Journal] OR "Arch Surg"[Journal] OR "Kidney Int"[Journal] OR "Lancet"[Journal] OR "Lancet Neurol"[Journal] OR "Lancet Oncol"[Journal] OR "Mayo Clin Proc"[Journal] OR "Med Care"[Journal] OR "Med Clin North Am"[Journal] OR "Med Lett Drugs Ther"[Journal] OR "Medicine (Baltimore)"[Journal] OR "N Engl J Med"[Journal] OR "Neurology"[Journal] OR "Nurs Clin North Am"[Journal] OR "Nurs Outlook"[Journal] OR "Nurs Res"[Journal] OR "Obesity (Silver Spring)"[Journal] OR "Obstet Gynecol"[Journal] OR "Orthop Clin North Am"[Journal] OR "Pain"[Journal] OR "Pediatr Clin North Am"[Journal] OR "Pediatrics"[Journal] OR "Pharmacotherapy"[Journal] OR "Phys Ther"[Journal] OR "Plast Reconstr Surg"[Journal] OR "Postgrad Med"[Journal] OR "Prev Med"[Journal] OR "Prog Cardiovasc Dis"[Journal] OR "Public Health Rep"[Journal] OR "Radiol Clin North Am"[Journal] OR "Radiology"[Journal] OR "Res Nurs Health"[Journal] OR "Rheumatology (Oxford)"[Journal] OR "South Med J"[Journal] OR "Spine (Phila Pa 1976)"[Journal] OR "Spine J"[Journal] OR "Stroke"[Journal] OR "Surg Clin North Am"[Journal] OR "Surgery"[Journal] OR "Thorax"[Journal] OR "Transl Res"[Journal] OR "Transplantation"[Journal] OR "Urol Clin North Am"[Journal] OR "West J Nurs Res"[Journal] OR "World J Surg"[Journal])';
+    	var search_strategy_RCT = ' AND Therapy/Narrow[filter] NOT (systematic[sb] OR "systematic review"[ti] OR "meta-analysis"[ti] OR "Cochrane Database Syst Rev"[journal]) AND ("2008/09/30"[CDAT] : "2013/09/29"[CDAT]) AND "humans"[MeSH Terms] AND "english"[language] AND hasabstract[text] AND ("Acad Emerg Med"[Journal] OR "Acad Med"[Journal] OR "Acta Orthop"[Journal] OR "Age Ageing"[Journal] OR "AJR Am J Roentgenol"[Journal] OR "Am Fam Physician"[Journal] OR "Am Heart J"[Journal] OR "Am J Cardiol"[Journal] OR "Am J Clin Nutr"[Journal] OR "Am J Clin Pathol"[Journal] OR "Am J Epidemiol"[Journal] OR "Am J Gastroenterol"[Journal] OR "Am J Kidney Dis"[Journal] OR "Am J Med"[Journal] OR "Am J Med Sci"[Journal] OR "Am J Nurs"[Journal] OR "Am J Obstet Gynecol"[Journal] OR "Am J Ophthalmol"[Journal] OR "Am J Pathol"[Journal] OR "Am J Phys Med Rehabil"[Journal] OR "Am J Prev Med"[Journal] OR "Am J Psychiatry"[Journal] OR "Am J Public Health"[Journal] OR "Am J Respir Crit Care Med"[Journal] OR "Am J Sports Med"[Journal] OR "Am J Surg"[Journal] OR "Am J Trop Med Hyg"[Journal] OR "Anaesthesia"[Journal] OR "Anesth Analg"[Journal] OR "Anesthesiology"[Journal] OR "Ann Emerg Med"[Journal] OR "Ann Fam Med"[Journal] OR "Ann Intern Med"[Journal] OR "Ann Neurol"[Journal] OR "Ann Otol Rhinol Laryngol"[Journal] OR "Ann Rheum Dis"[Journal] OR "Ann Surg"[Journal] OR "Ann Thorac Surg"[Journal] OR "Appl Nurs Res"[Journal] OR "Arch Dis Child"[Journal] OR "Arch Dis Child Fetal Neonatal Ed"[Journal] OR "Arch Environ Occup Health"[Journal] OR "Arch Pathol Lab Med"[Journal] OR "Arch Phys Med Rehabil"[Journal] OR "Arthritis Care Res (Hoboken)"[Journal] OR "Arthritis Rheum"[Journal] OR "Arthroscopy"[Journal] OR "BJOG"[Journal] OR "Blood"[Journal] OR "BMJ"[Journal] OR "Bone Joint J"[Journal] OR "Br J Gen Pract"[Journal] OR "Br J Psychiatry"[Journal] OR "Br J Radiol"[Journal] OR "Br J Surg"[Journal] OR "Brain"[Journal] OR "CADTH Technol Overv"[Journal] OR "CA Cancer J Clin"[Journal] OR "Can J Anaesth"[Journal] OR "Cancer"[Journal] OR "Cancer Nurs"[Journal] OR "Chest"[Journal] OR "Circulation"[Journal] OR "Clin J Am Soc Nephrol"[Journal] OR "Clin J Pain"[Journal] OR "Clin Orthop Relat Res"[Journal] OR "Clin Pediatr (Phila)"[Journal] OR "Clin Pharmacol Ther"[Journal] OR "Clin Rehabil"[Journal] OR "Clin Toxicol (Phila)"[Journal] OR "CMAJ"[Journal] OR "Cochrane Database Syst Rev"[Journal] OR "Crit Care Med"[Journal] OR "Curr Probl Surg"[Journal] OR "Diabet Med"[Journal] OR "Diabetes"[Journal] OR "Diabetes Care"[Journal] OR "Diabetes Obes Metab"[Journal] OR "Dig Dis Sci"[Journal] OR "Dis Mon"[Journal] OR "Endocrinology"[Journal] OR "Eur Heart J"[Journal] OR "Eur Respir J"[Journal] OR "Evid Rep Technol Assess (Full Rep)"[Journal] OR "Fam Pract"[Journal] OR "Foot Ankle Int"[Journal] OR "Gastroenterology"[Journal] OR "Gut"[Journal] OR "Headache"[Journal] OR "Health Technol Assess"[Journal] OR "Heart"[Journal] OR "Heart Lung"[Journal] OR "Hosp Health Netw"[Journal] OR "Hosp Pract (1995)"[Journal] OR "Implement Sci"[Journal] OR "Int J Clin Pract"[Journal] OR "Int J Nurs Stud"[Journal] OR "Int J Obes (Lond)"[Journal] OR "J Acad Nutr Diet"[Journal] OR "J Adv Nurs"[Journal] OR "J Allergy Clin Immunol"[Journal] OR "J Am Coll Cardiol"[Journal] OR "J Am Coll Surg"[Journal] OR "J Am Geriatr Soc"[Journal] OR "J Am Soc Nephrol"[Journal] OR "J Arthroplasty"[Journal] OR "J Bone Joint Surg Am"[Journal] OR "J Clin Endocrinol Metab"[Journal] OR "J Clin Invest"[Journal] OR "J Clin Nurs"[Journal] OR "J Clin Oncol"[Journal] OR "J Clin Pathol"[Journal] OR "J Clin Pharmacol"[Journal] OR "J Fam Pract"[Journal] OR "J Gen Intern Med"[Journal] OR "J Gerontol A Biol Sci Med Sci"[Journal] OR "J Gerontol B Psychol Sci Soc Sci"[Journal] OR "J Immunol"[Journal] OR "J Infect Dis"[Journal] OR "J Laryngol Otol"[Journal] OR "J Nerv Ment Dis"[Journal] OR "J Neurol Neurosurg Psychiatry"[Journal] OR "J Neurosurg"[Journal] OR "J Nurs Adm"[Journal] OR "J Nurs Scholarsh"[Journal] OR "J Oral Maxillofac Surg"[Journal] OR "J Orthop Sports Phys Ther"[Journal] OR "J Orthop Trauma"[Journal] OR "J Pain"[Journal] OR "J Pediatr"[Journal] OR "J Pediatr Orthop"[Journal] OR "J Physiother"[Journal] OR "J Rheumatol"[Journal] OR "J Shoulder Elbow Surg"[Journal] OR "J Surg Oncol"[Journal] OR "J Thorac Cardiovasc Surg"[Journal] OR "J Trauma"[Journal] OR "J Trauma Acute Care Surg"[Journal] OR "J Urol"[Journal] OR "J Vasc Surg"[Journal] OR "JAMA"[Journal] OR "JAMA Dermatol"[Journal] OR "Arch Dermatol"[Journal] OR "JAMA Intern Med"[Journal] OR "Arch Intern Med"[Journal] OR "JAMA Neurol"[Journal] OR "Arch Neurol"[Journal] OR "JAMA Ophthalmol"[Journal] OR "Arch Ophthalmol"[Journal] OR "JAMA Otolaryngol Head Neck Surg"[Journal] OR "Arch Otolaryngol Head Neck Surg"[Journal] OR "JAMA Pediatr"[Journal] OR "Arch Pediatr Adolesc Med"[Journal] OR "JAMA Psychiatry"[Journal] OR "Arch Gen Psychiatry"[Journal] OR "JAMA Surg"[Journal] OR "Arch Surg"[Journal] OR "Kidney Int"[Journal] OR "Lancet"[Journal] OR "Lancet Neurol"[Journal] OR "Lancet Oncol"[Journal] OR "Mayo Clin Proc"[Journal] OR "Med Care"[Journal] OR "Med Clin North Am"[Journal] OR "Med Lett Drugs Ther"[Journal] OR "Medicine (Baltimore)"[Journal] OR "N Engl J Med"[Journal] OR "Neurology"[Journal] OR "Nurs Clin North Am"[Journal] OR "Nurs Outlook"[Journal] OR "Nurs Res"[Journal] OR "Obesity (Silver Spring)"[Journal] OR "Obstet Gynecol"[Journal] OR "Orthop Clin North Am"[Journal] OR "Pain"[Journal] OR "Pediatr Clin North Am"[Journal] OR "Pediatrics"[Journal] OR "Pharmacotherapy"[Journal] OR "Phys Ther"[Journal] OR "Plast Reconstr Surg"[Journal] OR "Postgrad Med"[Journal] OR "Prev Med"[Journal] OR "Prog Cardiovasc Dis"[Journal] OR "Public Health Rep"[Journal] OR "Radiol Clin North Am"[Journal] OR "Radiology"[Journal] OR "Res Nurs Health"[Journal] OR "Rheumatology (Oxford)"[Journal] OR "South Med J"[Journal] OR "Spine (Phila Pa 1976)"[Journal] OR "Spine J"[Journal] OR "Stroke"[Journal] OR "Surg Clin North Am"[Journal] OR "Surgery"[Journal] OR "Thorax"[Journal] OR "Transl Res"[Journal] OR "Transplantation"[Journal] OR "Urol Clin North Am"[Journal] OR "West J Nurs Res"[Journal] OR "World J Surg"[Journal])';
+    	//var myRe = /\"[\w]+\"\[MeSH Terms\]/;
+    	var myRe = /\"([\w.,\s]+)\"\[MeSH Terms\]/;
+    	var meshArray = [] ;
+    	
+    	firstQuery(query).then(function(result){
+    		
+    		var meshStr = JSON.stringify(result);
+    	    var meshObj = JSON.parse(meshStr);
+    	    var queryArray = meshObj.esearchresult.translationset ;
+    	    
+    	    for (var i = 0 ; i < queryArray.length ; i++ ) {
+    	    	var regResult = myRe.exec(queryArray[i].to) ;
+    	    	meshArray[i] = regResult[1] ;	
+    	    }
+        	       	
+        	var final_query = [];
+        	
+    	    for (var j = 0 ; j < meshArray.length ; j++ ) {
+    	    	
+    	    	final_query.push ('"' + meshArray[j] + '"[MeSH Terms]' + search_strategy_SR ) ;
+    	    	final_query.push ('"' + meshArray[j] + '"[MeSH Terms]' + search_strategy_RCT) ; 	
+    	    }
+    	    
+	   	    var promises = [];
+    	    
+    	    for (var k = 0 ; k < final_query.length ; k++ ) {
+    	    	promises.push (secondQuery(final_query[k]));	
+    	    }
+    	        	    
+    	    Promise.all(promises).then(function(dataArr) {
+    	    	dataArr.forEach(function(data) {
+    	    		var idStr = JSON.stringify(data);
+        	   		var idObj = JSON.parse(idStr);
+        	   		var idArray = idObj.esearchresult.idlist ;
+					//Json object to be sent to KS webservice
+        	   		
+       	    		for (var l = 0 ; l < idArray.length ; l++ ) {
+       	    			pubmedID.push(String(idArray[l]));
+       	    		}
+       	    		//alert (pubmedID.length);	
+    	    	}); 
+    	    	
+    	    	var input = '[';
+    	    	for (var m = 0 ; m < pubmedID.length ; m++ ) {
+    	    		if (m == pubmedID.length - 1 ) {
+    	    			input  += '"' + pubmedID[m] + '"]';
+    	    		} else {
+    	    			input  += '"' + pubmedID[m] + '",';
+    	    		}
+    	    	}
+    	    	
+    	    	document.getElementById("demo").innerHTML = input ;
+    	    	ksQuery(input).then(function(result){
+    	    	var tempStr = JSON.stringify(result);
+    	    	document.getElementById("demo2").innerHTML = tempStr ;
+    	    	
+    	    	}).catch(function(error) {
+       	    	console.log("There was an error in third step of processing data:" + error);
+       	    	});
+    	    	
+       	    }).catch(function(error) {
+       	    	console.log("There was an error in second step of processing data:" + error);
+       	    	}); 
+   	    	
+        
+    	        //document.getElementById("demo").innerHTML = jsonStr ;
+    	        //document.write(obj.esearchresult.idlist[0]);
+	    		
+
+    	}).catch(function(error) {
+    		console.log("There was an error in first step of processing data:" + error);
+    	});
+    });
+});
+</script>
+</head>
+<body>
+<form>
+<input id="querybox_text" type="text" name ="term">
+
+<button type="button">Submit</button>
+<!--img height="100%" width="100%" src="search-button.png" alt="click to search"-->
+
+<p id="demo"></p>
+<p id="demo2"></p>
+
+
+</form>
+
+
+
+</body>
+</html>

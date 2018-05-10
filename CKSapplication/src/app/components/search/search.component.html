@@ -1,0 +1,89 @@
+<div [ngSwitch]='status'>
+  <div class="loader-search" *ngSwitchCase="false">
+      <div class="spinner-container"><mat-spinner></mat-spinner></div>
+  </div>
+  <div *ngSwitchCase="true">
+    <div class="patientBanner" *ngIf="need_patient_banner">
+        Patient: {{patientName}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Age: {{patientAge}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="showGender">Gender: {{patientGender}}</span><span class="showDate"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: {{currentDate}}</span>
+    </div>
+    <div class="topSpace" *ngIf="topSpace"></div>
+    <h2>Clinical Knowledge Summary</h2>
+    <div style="height: .5rem;" *ngIf="topSpace" ></div>
+    <div id="search_container">
+      <mat-card id="search-card" #focusable (mouseenter)='mouseenter($event)' (mouseleave)="mouseleave($event)" >
+        <input id="typeahead-basic" class="form-control" type="text" [(ngModel)]="textInput" [ngbTypeahead]="search" [autofocus]="true"
+               (ngModelChange)="checkTerm()" placeholder="Type Disease or Medication" (keydown.enter)="redirect($event)"/>
+        <button mat-icon-button clickTracker id="history-search" [matMenuTriggerFor]="historyMenu" *ngIf="recentHist.length!==0">
+          <i class="material-icons">history</i>
+          <span class="history-menu">
+          <mat-menu #historyMenu="matMenu">
+            <button mat-menu-item clickTracker class="history-item-search" *ngFor="let item of recentHist"
+                    (click)="changeToRecent(item.term)">{{item.term}}</button>
+            <button mat-menu-item id="clearHistory-search" clickTracker (click)="clearHistory()">
+              <mat-icon>delete</mat-icon>
+              <span>Clear History</span>
+            </button>
+           </mat-menu>
+          </span>
+        </button>
+
+        <button mat-icon-button clickTracker id="addToQuery" (click)="changeQuery()" matTooltip="Add item to pubmed query.">
+          <i class="material-icons">add</i>
+        </button>
+        <button mat-icon-button clickTracker id="searchIcon" (click)="redirect($event)">
+          <i class="material-icons" style="color: #3F51B5;">search</i>
+        </button>
+      </mat-card>
+      <div class="queryList">{{queryText}}&nbsp;
+        <span clickTracker id="clearQuery" class='filterOptionTypeNone' *ngIf="queryText!=''" (click)="clearQuery()">
+          clear
+        </span>
+      </div>
+    </div>
+
+    <mat-tab-group id="tabbed-groups" *ngIf="conditionsLoaded||medicationsLoaded">
+      <mat-tab label="Conditions">
+        <mat-card *ngIf="conditionsLoaded" id="conditions">
+          <mat-selection-list #conditions>
+            <mat-list-option clickTracker class="conditions" *ngFor="let cond of conditionList" (click)="listSelection(!cond.checked, cond)"
+                             [selected]="cond.checked" [value]="cond.content.resource.code.text">
+              {{utiles.toTitleCase(cond.content.resource.code.text)}}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-card>
+      </mat-tab>
+      <mat-tab label="Medications">
+        <mat-card id="medications" *ngIf="medicationsLoaded">
+          <mat-selection-list>
+            <mat-list-option clickTracker class="medications" *ngFor="let med of medicationList" (click)="listSelection(!med.checked, med)"
+                             [selected]="med.checked" [value]="med.content.resource.medicationCodeableConcept.text">
+              {{utiles.toTitleCase(med.content.resource.medicationCodeableConcept.text)}}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="two-panel">
+      <mat-card *ngIf="conditionsLoaded" id="conditions">
+        <mat-selection-list #conditions>
+          <mat-list-option clickTracker class="conditions" *ngFor="let cond of conditionList" (click)="listSelection(!cond.checked, cond)"
+                           [selected]="cond.checked" [value]="cond.content.resource.code.text">
+            {{utiles.toTitleCase(cond.content.resource.code.text)}}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-card>
+      <mat-card id="medications" *ngIf="medicationsLoaded">
+        <mat-selection-list>
+          <mat-list-option clickTracker class="medications" *ngFor="let med of medicationList" (click)="listSelection(!med.checked, med)"
+            [selected]="med.checked" [value]="med.content.resource.medicationCodeableConcept.text">
+            {{utiles.toTitleCase(med.content.resource.medicationCodeableConcept.text)}}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+
+
